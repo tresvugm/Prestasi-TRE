@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publikasi Mahasiswa - Teknologi Rekayasa Elektro</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f8f9fa; 
+            margin: 0;
+        }
+        .hero-section { 
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); 
+            color: white; 
+            padding: 60px 0; 
+        }
+        .card { 
+            border: none; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
+        }
+        .btn-kembali {
+            color: #1e3a8a;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .btn-kembali:hover {
+            text-decoration: underline;
+        }
+        .stat-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #1e3a8a;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            transition: transform 0.2s;
+        }
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+        .stat-label {
+            font-size: 0.875rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+        table.dataTable thead th {
+            background-color: #1e3a8a;
+            color: white;
+            border-bottom: none;
+            padding: 12px 14px;
+        }
+        .dropdown-item:hover {
+            background-color: #eff6ff;
+            color: #1e3a8a;
+        }
+        .badge-jurnal-intl {
+            background-color: #dcfce7;
+            color: #166534;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+        .badge-jurnal-nas {
+            background-color: #dbeafe;
+            color: #1e40af;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+        .badge-prosiding {
+            background-color: #fef3c7;
+            color: #92400e;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+        .badge-other {
+            background-color: #f1f5f9;
+            color: #475569;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+        .student-list {
+            margin: 0;
+            padding-left: 18px;
+        }
+        .student-list li {
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top" style="border-bottom: 3px solid #1e3a8a;">
+        <div class="container">
+            <a class="navbar-brand" href="https://tresvugm.github.io/">
+                <img src="images/Logo TRE Banner (Colour).png" alt="Logo TRE UGM" height="45" class="d-inline-block align-text-top">
+            </a>
+            
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarUtama">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse justify-content-end" id="navbarUtama">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Layanan TRE
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-2" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2" href="https://tresvugm.github.io/">
+                                    <i class="bi bi-house-door me-2 text-primary"></i> Beranda
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2" href="https://tresvugm.github.io/praktikum.html">
+                                    <i class="bi bi-journal-code me-2 text-primary"></i> Praktikum
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2" href="https://tresvugm.github.io/Magang-TRE/">
+                                    <i class="bi bi-briefcase me-2 text-primary"></i> Magang
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2" href="https://tresvugm.github.io/Tugas-Akhir-TRE/">
+                                    <i class="bi bi-mortarboard me-2 text-primary"></i> Tugas Akhir
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2" href="https://tresvugm.github.io/Prestasi-TRE/">
+                                    <i class="bi bi-trophy me-2 text-primary"></i> Prestasi
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2" href="https://tresvugm.github.io/Dokumen-Penunjang-TRE/">
+                                    <i class="bi bi-folder2-open me-2 text-primary"></i> Dokumen Penunjang
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Publikasi Mahasiswa</h1>
+            <p class="lead opacity-75 mb-0">Daftar Publikasi Karya Ilmiah, Jurnal, dan Prosiding Mahasiswa TRE</p>
+        </div>
+    </header>
+
+    <main class="container my-5">
+        <a href="index.html" class="btn-kembali">
+            <i class="bi bi-arrow-left me-2"></i> Kembali ke Menu Prestasi
+        </a>
+
+        <!-- Ringkasan Statistik -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-label">Total Publikasi</div>
+                    <div class="stat-value" id="statTotalPub">-</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card" style="border-left-color: #16a34a;">
+                    <div class="stat-label">Jurnal Internasional</div>
+                    <div class="stat-value text-success" id="statJurnalIntl">-</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card" style="border-left-color: #2563eb;">
+                    <div class="stat-label">Jurnal Nasional</div>
+                    <div class="stat-value text-primary" id="statJurnalNas">-</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card" style="border-left-color: #d97706;">
+                    <div class="stat-label">Prosiding</div>
+                    <div class="stat-value text-warning" id="statProsiding">-</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter & Tabel -->
+        <div class="card p-4">
+            <div class="row g-3 mb-3">
+                <div class="col-md-3">
+                    <label class="form-label small fw-semibold text-muted">Filter Jenis/Tingkat</label>
+                    <select id="filterJenisPub" class="form-select form-select-sm">
+                        <option value="">Semua Jenis</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table id="tabelPublikasi" class="table table-hover align-middle w-100">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;">No</th>
+                            <th style="width: 25%;">Nama Mahasiswa</th>
+                            <th style="width: 35%;">Judul Publikasi</th>
+                            <th style="width: 15%;">Jenis / Tingkat</th>
+                            <th style="width: 10%;">Tanggal</th>
+                            <th style="width: 10%;">Jurnal / Prosiding</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelPubBody">
+                        <tr>
+                            <td colspan="6" class="text-center py-5">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Memuat data...</span>
+                                </div>
+                                <div class="mt-2 text-muted">Mengambil data publikasi dari Google Sheets...</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-5 text-muted border-top mt-5">
+        <p class="mb-0">&copy; 2026 Teknologi Rekayasa Elektro - Sekolah Vokasi UGM</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        const URL_GOOGLE_SHEETS_PUB = "https://docs.google.com/spreadsheets/d/1NxgqWPXrbk57aFu7qj2Jh6ER2RtwM87J/gviz/tq?tqx=out:json&gid=1533682232";
+
+        $(document).ready(function() {
+            fetch(URL_GOOGLE_SHEETS_PUB)
+                .then(res => res.text())
+                .then(text => {
+                    const jsonStr = text.substring(text.indexOf("(") + 1, text.lastIndexOf(")"));
+                    const jsonData = JSON.parse(jsonStr);
+                    const rows = jsonData.table.rows;
+                    
+                    let items = [];
+                    let currentItem = null;
+                    let countIntl = 0;
+                    let countNas = 0;
+                    let countPros = 0;
+                    let setJenis = new Set();
+
+                    rows.forEach(r => {
+                        if (!r.c) return;
+                        
+                        const getVal = (idx) => {
+                            if (!r.c[idx]) return "";
+                            return (r.c[idx].f || r.c[idx].v || "").toString().trim();
+                        };
+
+                        const no = getVal(0);
+                        const nama = getVal(1);
+                        const nim = getVal(2);
+                        const judul = getVal(3);
+                        const tanggal = getVal(4);
+                        const tingkat = getVal(5);
+                        const jurnal = getVal(6);
+
+                        if (!no && !nama && !judul) return;
+
+                        // Jika baris memiliki Nomor atau Judul, merupakan item publikasi baru
+                        if (no || judul) {
+                            currentItem = {
+                                no: no || (items.length + 1).toString(),
+                                mahasiswa: nama ? [{ nama: nama, nim: nim }] : [],
+                                judul: judul,
+                                tanggal: tanggal,
+                                tingkat: tingkat,
+                                jurnal: jurnal
+                            };
+                            items.push(currentItem);
+                        } else if (currentItem && nama) {
+                            // Baris merge lanjutan: masukkan mahasiswa ke item sebelumnya
+                            currentItem.mahasiswa.push({ nama: nama, nim: nim });
+                        }
+                    });
+
+                    let tbodyHtml = "";
+                    items.forEach((item, index) => {
+                        const tkLower = (item.tingkat || "").toLowerCase();
+                        if (tkLower.includes("international") || tkLower.includes("internasional")) {
+                            countIntl++;
+                        } else if (tkLower.includes("jurnal") && tkLower.includes("nasional")) {
+                            countNas++;
+                        } else if (tkLower.includes("prosiding")) {
+                            countPros++;
+                        }
+
+                        if (item.tingkat) setJenis.add(item.tingkat);
+
+                        // Format tampilan nama mahasiswa beserta NIM
+                        let mhsHtml = "";
+                        if (item.mahasiswa.length === 1) {
+                            const m = item.mahasiswa[0];
+                            mhsHtml = `<strong>${m.nama}</strong>` + (m.nim ? `<br><small class="text-muted">${m.nim}</small>` : "");
+                        } else if (item.mahasiswa.length > 1) {
+                            mhsHtml = `<ol class="student-list">${item.mahasiswa.map(m => `<li><strong>${m.nama}</strong>` + (m.nim ? ` <span class="text-muted small">(${m.nim})</span>` : "") + `</li>`).join("")}</ol>`;
+                        } else {
+                            mhsHtml = "-";
+                        }
+
+                        let badgeJenis = `<span class="badge-other">${item.tingkat || "-"}</span>`;
+                        if (tkLower.includes("international") || tkLower.includes("internasional")) {
+                            badgeJenis = `<span class="badge-jurnal-intl">${item.tingkat}</span>`;
+                        } else if (tkLower.includes("prosiding")) {
+                            badgeJenis = `<span class="badge-prosiding">${item.tingkat}</span>`;
+                        } else if (tkLower.includes("jurnal")) {
+                            badgeJenis = `<span class="badge-jurnal-nas">${item.tingkat}</span>`;
+                        }
+
+                        tbodyHtml += `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${mhsHtml}</td>
+                                <td><strong>${item.judul || "-"}</strong></td>
+                                <td>${badgeJenis}</td>
+                                <td>${item.tanggal || "-"}</td>
+                                <td>${item.jurnal || "-"}</td>
+                            </tr>
+                        `;
+                    });
+
+                    $("#statTotalPub").text(items.length);
+                    $("#statJurnalIntl").text(countIntl);
+                    $("#statJurnalNas").text(countNas);
+                    $("#statProsiding").text(countPros);
+
+                    Array.from(setJenis).sort().forEach(j => {
+                        $("#filterJenisPub").append(`<option value="${j}">${j}</option>`);
+                    });
+
+                    $("#tabelPubBody").html(tbodyHtml);
+
+                    const dataTable = $("#tabelPublikasi").DataTable({
+                        language: {
+                            search: "Cari:",
+                            lengthMenu: "Tampilkan _MENU_ data",
+                            info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                            infoEmpty: "Menampilkan 0 data",
+                            infoFiltered: "(disaring dari _MAX_ total data)",
+                            zeroRecords: "Tidak ada data yang cocok",
+                            paginate: {
+                                first: "Pertama",
+                                last: "Terakhir",
+                                next: "Selanjutnya",
+                                previous: "Sebelumnya"
+                            }
+                        },
+                        pageLength: 10
+                    });
+
+                    $("#filterJenisPub").on("change", function() {
+                        dataTable.column(3).search(this.value).draw();
+                    });
+                })
+                .catch(err => {
+                    console.error(err);
+                    $("#tabelPubBody").html(`
+                        <tr>
+                            <td colspan="6" class="text-center text-danger py-4">
+                                <i class="bi bi-exclamation-triangle fs-2 d-block mb-2"></i>
+                                Gagal memuat data dari Google Sheets. Pastikan spreadsheet telah diatur public.
+                            </td>
+                        </tr>
+                    `);
+                });
+        });
+    </script>
+</body>
+</html>

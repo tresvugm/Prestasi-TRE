@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HKI Mahasiswa - Teknologi Rekayasa Elektro</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f8f9fa; 
+            margin: 0;
+        }
+        .hero-section { 
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); 
+            color: white; 
+            padding: 60px 0; 
+        }
+        .card { 
+            border: none; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
+        }
+        .btn-kembali {
+            color: #1e3a8a;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .btn-kembali:hover {
+            text-decoration: underline;
+        }
+        .stat-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #1e3a8a;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            transition: transform 0.2s;
+        }
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+        .stat-label {
+            font-size: 0.875rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+        table.dataTable thead th {
+            background-color: #1e3a8a;
+            color: white;
+            border-bottom: none;
+            padding: 12px 14px;
+        }
+        .dropdown-item:hover {
+            background-color: #eff6ff;
+            color: #1e3a8a;
+        }
+        .badge-hak-cipta {
+            background-color: #e0e7ff;
+            color: #3730a3;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+        .badge-desain-industri {
+            background-color: #fef3c7;
+            color: #92400e;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+        .badge-paten {
+            background-color: #d1fae5;
+            color: #065f46;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+        .badge-other {
+            background-color: #f1f5f9;
+            color: #475569;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+        .btn-link-hki {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 12px;
+            background: #1e3a8a;
+            color: #fff;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .btn-link-hki:hover {
+            background: #172554;
+            color: #fff;
+        }
+        .student-list {
+            margin: 0;
+            padding-left: 18px;
+        }
+        .student-list li {
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top" style="border-bottom: 3px solid #1e3a8a;">
+        <div class="container">
+            <a class="navbar-brand" href="https://tresvugm.github.io/">
+                <img src="images/Logo TRE Banner (Colour).png" alt="Logo TRE UGM" height="45" class="d-inline-block align-text-top">
+            </a>
+            
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarUtama">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse justify-content-end" id="navbarUtama">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Layanan TRE
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-2" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2" href="https://tresvugm.github.io/">
+                                    <i class="bi bi-house-door me-2 text-primary"></i> Beranda
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2" href="https://tresvugm.github.io/praktikum.html">
+                                    <i class="bi bi-journal-code me-2 text-primary"></i> Praktikum
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2" href="https://tresvugm.github.io/Magang-TRE/">
+                                    <i class="bi bi-briefcase me-2 text-primary"></i> Magang
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2" href="https://tresvugm.github.io/Tugas-Akhir-TRE/">
+                                    <i class="bi bi-mortarboard me-2 text-primary"></i> Tugas Akhir
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2" href="https://tresvugm.github.io/Prestasi-TRE/">
+                                    <i class="bi bi-trophy me-2 text-primary"></i> Prestasi
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2" href="https://tresvugm.github.io/Dokumen-Penunjang-TRE/">
+                                    <i class="bi bi-folder2-open me-2 text-primary"></i> Dokumen Penunjang
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold">HKI Mahasiswa</h1>
+            <p class="lead opacity-75 mb-0">Daftar Hak Kekayaan Intelektual (Hak Cipta, Desain Industri, Paten) Mahasiswa TRE</p>
+        </div>
+    </header>
+
+    <main class="container my-5">
+        <a href="index.html" class="btn-kembali">
+            <i class="bi bi-arrow-left me-2"></i> Kembali ke Menu Prestasi
+        </a>
+
+        <!-- Ringkasan Statistik -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-label">Total HKI</div>
+                    <div class="stat-value" id="statTotalHki">-</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card" style="border-left-color: #4f46e5;">
+                    <div class="stat-label">Hak Cipta</div>
+                    <div class="stat-value text-indigo" id="statHakCipta" style="color: #4f46e5;">-</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card" style="border-left-color: #d97706;">
+                    <div class="stat-label">Desain Industri</div>
+                    <div class="stat-value text-warning" id="statDesainIndustri">-</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card" style="border-left-color: #059669;">
+                    <div class="stat-label">Paten</div>
+                    <div class="stat-value text-success" id="statPaten">-</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter & Tabel -->
+        <div class="card p-4">
+            <div class="row g-3 mb-3">
+                <div class="col-md-3">
+                    <label class="form-label small fw-semibold text-muted">Filter Jenis HKI</label>
+                    <select id="filterJenisHki" class="form-select form-select-sm">
+                        <option value="">Semua Jenis</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table id="tabelHki" class="table table-hover align-middle w-100">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;">No</th>
+                            <th style="width: 25%;">Nama Mahasiswa</th>
+                            <th style="width: 32%;">Judul Karya / HKI</th>
+                            <th style="width: 14%;">Jenis HKI</th>
+                            <th style="width: 10%;">Nomor HKI</th>
+                            <th style="width: 8%;">Tanggal</th>
+                            <th style="width: 6%;">Bukti</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelHkiBody">
+                        <tr>
+                            <td colspan="7" class="text-center py-5">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Memuat data...</span>
+                                </div>
+                                <div class="mt-2 text-muted">Mengambil data HKI dari Google Sheets...</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-5 text-muted border-top mt-5">
+        <p class="mb-0">&copy; 2026 Teknologi Rekayasa Elektro - Sekolah Vokasi UGM</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        const URL_GOOGLE_SHEETS_HKI = "https://docs.google.com/spreadsheets/d/1zzOCr2LaF869Ng_5ob1azKVcH0hX7FMe/gviz/tq?tqx=out:json&gid=1165193646";
+
+        $(document).ready(function() {
+            fetch(URL_GOOGLE_SHEETS_HKI)
+                .then(res => res.text())
+                .then(text => {
+                    const jsonStr = text.substring(text.indexOf("(") + 1, text.lastIndexOf(")"));
+                    const jsonData = JSON.parse(jsonStr);
+                    const rows = jsonData.table.rows;
+                    
+                    let items = [];
+                    let currentItem = null;
+                    let countHakCipta = 0;
+                    let countDesain = 0;
+                    let countPaten = 0;
+                    let setJenis = new Set();
+
+                    rows.forEach(r => {
+                        if (!r.c) return;
+                        
+                        const getVal = (idx) => {
+                            if (!r.c[idx]) return "";
+                            return (r.c[idx].f || r.c[idx].v || "").toString().trim();
+                        };
+
+                        const no = getVal(0);
+                        const nama = getVal(1);
+                        const nim = getVal(2);
+                        const judul = getVal(3);
+                        const jenis = getVal(4);
+                        const tanggal = getVal(5);
+                        const nomor = getVal(6);
+                        const bukti = getVal(7);
+                        const link = getVal(8);
+
+                        if (!no && !nama && !judul) return;
+
+                        // Jika baris memiliki Nomor atau Judul, merupakan item HKI baru
+                        if (no || judul) {
+                            currentItem = {
+                                no: no || (items.length + 1).toString(),
+                                mahasiswa: nama ? [{ nama: nama, nim: nim }] : [],
+                                judul: judul,
+                                jenis: jenis,
+                                tanggal: tanggal,
+                                nomor: nomor,
+                                bukti: bukti,
+                                link: link
+                            };
+                            items.push(currentItem);
+                        } else if (currentItem && nama) {
+                            // Baris merge lanjutan: masukkan mahasiswa ke item sebelumnya
+                            currentItem.mahasiswa.push({ nama: nama, nim: nim });
+                        }
+                    });
+
+                    let tbodyHtml = "";
+                    items.forEach((item, index) => {
+                        const jnLower = (item.jenis || "").toLowerCase();
+                        if (jnLower.includes("hak cipta")) {
+                            countHakCipta++;
+                        } else if (jnLower.includes("desain")) {
+                            countDesain++;
+                        } else if (jnLower.includes("paten")) {
+                            countPaten++;
+                        }
+
+                        if (item.jenis) setJenis.add(item.jenis);
+
+                        // Format tampilan nama mahasiswa beserta NIM
+                        let mhsHtml = "";
+                        if (item.mahasiswa.length === 1) {
+                            const m = item.mahasiswa[0];
+                            mhsHtml = `<strong>${m.nama}</strong>` + (m.nim ? `<br><small class="text-muted">${m.nim}</small>` : "");
+                        } else if (item.mahasiswa.length > 1) {
+                            mhsHtml = `<ol class="student-list">${item.mahasiswa.map(m => `<li><strong>${m.nama}</strong>` + (m.nim ? ` <span class="text-muted small">(${m.nim})</span>` : "") + `</li>`).join("")}</ol>`;
+                        } else {
+                            mhsHtml = "-";
+                        }
+
+                        let badgeJenis = `<span class="badge-other">${item.jenis || "-"}</span>`;
+                        if (jnLower.includes("hak cipta")) {
+                            badgeJenis = `<span class="badge-hak-cipta">${item.jenis}</span>`;
+                        } else if (jnLower.includes("desain")) {
+                            badgeJenis = `<span class="badge-desain-industri">${item.jenis}</span>`;
+                        } else if (jnLower.includes("paten")) {
+                            badgeJenis = `<span class="badge-paten">${item.jenis}</span>`;
+                        }
+
+                        const linkAction = (item.link && item.link.startsWith("http")) 
+                            ? `<a href="${item.link}" target="_blank" class="btn-link-hki" title="Buka Dokumen Bukti"><i class="bi bi-file-earmark-pdf"></i> Bukti</a>`
+                            : `<span class="text-muted small">-</span>`;
+
+                        tbodyHtml += `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${mhsHtml}</td>
+                                <td><strong>${item.judul || "-"}</strong></td>
+                                <td>${badgeJenis}</td>
+                                <td><code>${item.nomor || "-"}</code></td>
+                                <td>${item.tanggal || "-"}</td>
+                                <td>${linkAction}</td>
+                            </tr>
+                        `;
+                    });
+
+                    $("#statTotalHki").text(items.length);
+                    $("#statHakCipta").text(countHakCipta);
+                    $("#statDesainIndustri").text(countDesain);
+                    $("#statPaten").text(countPaten);
+
+                    Array.from(setJenis).sort().forEach(j => {
+                        $("#filterJenisHki").append(`<option value="${j}">${j}</option>`);
+                    });
+
+                    $("#tabelHkiBody").html(tbodyHtml);
+
+                    const dataTable = $("#tabelHki").DataTable({
+                        language: {
+                            search: "Cari:",
+                            lengthMenu: "Tampilkan _MENU_ data",
+                            info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                            infoEmpty: "Menampilkan 0 data",
+                            infoFiltered: "(disaring dari _MAX_ total data)",
+                            zeroRecords: "Tidak ada data yang cocok",
+                            paginate: {
+                                first: "Pertama",
+                                last: "Terakhir",
+                                next: "Selanjutnya",
+                                previous: "Sebelumnya"
+                            }
+                        },
+                        pageLength: 10
+                    });
+
+                    $("#filterJenisHki").on("change", function() {
+                        dataTable.column(3).search(this.value).draw();
+                    });
+                })
+                .catch(err => {
+                    console.error(err);
+                    $("#tabelHkiBody").html(`
+                        <tr>
+                            <td colspan="7" class="text-center text-danger py-4">
+                                <i class="bi bi-exclamation-triangle fs-2 d-block mb-2"></i>
+                                Gagal memuat data dari Google Sheets. Pastikan spreadsheet telah diatur public.
+                            </td>
+                        </tr>
+                    `);
+                });
+        });
+    </script>
+</body>
+</html>
