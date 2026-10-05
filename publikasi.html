@@ -302,6 +302,29 @@
                         }
                     });
 
+                    // Urutkan data dari tanggal terbaru ke terlama
+                    function parseDateScore(dateStr) {
+                        if (!dateStr) return 0;
+                        const s = dateStr.toString().trim();
+                        if (!s) return 0;
+                        const dmyMatch = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
+                        if (dmyMatch) {
+                            return new Date(parseInt(dmyMatch[3], 10), parseInt(dmyMatch[2], 10) - 1, parseInt(dmyMatch[1], 10)).getTime() || 0;
+                        }
+                        const ymdMatch = s.match(/^(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})$/);
+                        if (ymdMatch) {
+                            return new Date(parseInt(ymdMatch[1], 10), parseInt(ymdMatch[2], 10) - 1, parseInt(ymdMatch[3], 10)).getTime() || 0;
+                        }
+                        const yearMatch = s.match(/^(\d{4})$/);
+                        if (yearMatch) {
+                            return new Date(parseInt(yearMatch[1], 10), 0, 1).getTime() || 0;
+                        }
+                        const t = Date.parse(s);
+                        return isNaN(t) ? 0 : t;
+                    }
+
+                    items.sort((a, b) => parseDateScore(b.tanggal) - parseDateScore(a.tanggal));
+
                     let tbodyHtml = "";
                     items.forEach((item, index) => {
                         const tkLower = (item.tingkat || "").toLowerCase();
@@ -373,7 +396,8 @@
                                 previous: "Sebelumnya"
                             }
                         },
-                        pageLength: 10
+                        pageLength: 10,
+                        order: []
                     });
 
                     $("#filterJenisPub").on("change", function() {
